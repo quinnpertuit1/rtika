@@ -1,11 +1,11 @@
 #' Install or Update the Apache Tika \code{jar}
 #'
 #' This downloads and installs the Tika App \code{jar} (~60 MB) into a user directory,
-#' and verifies the integrity of the file using a md5 checksum.
+#' and verifies the integrity of the file using a checksum.
 #' The default settings should work fine.
 #'
 #' @param version The declared Tika version
-#' @param md5_sum The md5 checksum. Set to an empty string \code{""} to skip the check.
+#' @param digest The sha15 checksum. Set to an empty string \code{""} to skip the check.
 #' @param mirrors A vector Apache mirror sites. One is picked randomly.
 #' @param retries The number of times to try the download.
 #' @param url Optional url of a particular file to download. Will override downloading from random mirrors.
@@ -53,8 +53,12 @@
 #'
 #' @export
 
-install_tika <- function(version = 1.18,
-                         md5_sum = "7458883287f99020211e447350eaeeee",
+install_tika <- function(version = 1.19,
+                         digest = paste0(
+     "668cd4770ce98fca79c9af",
+    "63bed718011f6e229ed8834ef5ead81536aad476fc",
+    "1e3d99a07bee213acb36e102347d3a91dad9dfabd9",
+    "2c20017ea5620fd8b824db"),
                          mirrors = c(
                            "http://mirrors.ocf.berkeley.edu/apache/tika/",
                            "http://apache.cs.utah.edu/tika/",
@@ -142,11 +146,11 @@ Removing the temporary file and stopping the installation.")
     stop('Stopping. The "tika_jar()" funtion could not find the Tika App .jar')
   }
 
-  if (nchar(md5_sum) > 0) {
-    file_integrity <- tika_check(md5_sum)
+  if (nchar(digest) > 0) {
+    file_integrity <- tika_check(digest)
 
     if (!file_integrity) {
-      stop("The Tika App .jar integrity is bad! It failed the md5 checksum test.
+      stop("The Tika App .jar integrity is bad! It failed the checksum test.
     Removing the file and stopping installation.")
       file.remove(exists)
     } else {

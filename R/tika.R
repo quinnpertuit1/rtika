@@ -4,7 +4,7 @@
 #' Get either plain text or structured \code{XHTML}.
 #' Metadata includes \code{Content-Type}, character encoding, and Exif data from
 #' jpeg or tiff images. See the long list of supported file types:
-#' \url{https://tika.apache.org/1.17/formats.html}.
+#' \url{https://tika.apache.org/1.19/formats.html}.
 #'
 #' @param input Character vector describing the paths to the input documents.
 #' Strings starting with 'http://','https://', or 'ftp://' are downloaded to a
@@ -150,8 +150,8 @@ tika <- function(input,
                  output = c("text", "jsonRecursive", "xml", "html")[1],
                  output_dir = "",
                  return = TRUE,
-                 java = "java",
-                 jar = tika_jar(),
+                 java = rtika::java(),
+                 jar = rtika::tika_jar(),
                  threads = 2,
                  max_restarts = integer(),
                  timeout = 300000,
@@ -163,15 +163,20 @@ tika <- function(input,
 
   # Special thanks to Hadley the git tutorial at:
   # http://r-pkgs.had.co.nz/git.html
-    # Sys.setenv(NOT_CRAN = TRUE)
-  # Useful functions:
-  # devtools::test();
-  # devtools::document()
-  # devtools::build_vignettes() ;
+
+  # When updating the package, run these functions in order:
+  # devtools::document() # sets up NAMESPACE and .Rd documentation files to match function
+  # devtools::test(); 
+  # devtools::build()
+  
+   
+  # Sys.setenv(NOT_CRAN = TRUE); pkgdown::clean_site() ; pkgdown::build_site() # https://www.r-bloggers.com/building-a-website-with-pkgdown-a-short-guide/
+    
+   
+  
+  # Suggested functions to run occasionally:
   # goodpractice::gp()
-  # styler::style_dir()
-  # pkgdown::clean_site() ; pkgdown::build_site()
-  # https://www.r-bloggers.com/building-a-website-with-pkgdown-a-short-guide/
+  # styler::style_dir() # note this has made some files break in the past, 
 
   # TODO:  memory setting with java -Xmx1024m -jar.
   # Probably also adjust child process -JXmx4g
@@ -211,7 +216,7 @@ tika <- function(input,
   )
   # TODO: consider a config file
   # for fine grained control over parsers.
-  # see: https://tika.apache.org/1.17/configuring.html
+  # see: https://tika.apache.org/1.19/configuring.html
   # but waiting for batch format to stabilize.
 
   # Define return variable structure  -----------------------------------

@@ -4,16 +4,18 @@
 \alias{install_tika}
 \title{Install or Update the Apache Tika \code{jar}}
 \usage{
-install_tika(version = 1.18, md5_sum = "7458883287f99020211e447350eaeeee",
+install_tika(version = 1.19, digest = paste0("668cd4770ce98fca79c9af",
+  "63bed718011f6e229ed8834ef5ead81536aad476fc",
+  "1e3d99a07bee213acb36e102347d3a91dad9dfabd9", "2c20017ea5620fd8b824db"),
   mirrors = c("http://mirrors.ocf.berkeley.edu/apache/tika/",
   "http://apache.cs.utah.edu/tika/",
-  "http://mirror.cc.columbia.edu/pub/software/apache/tika/"), retries = 2,
-  url = character())
+  "http://mirror.cc.columbia.edu/pub/software/apache/tika/"),
+  retries = 2, url = character())
 }
 \arguments{
 \item{version}{The declared Tika version}
 
-\item{md5_sum}{The md5 checksum. Set to an empty string \code{""} to skip the check.}
+\item{digest}{The sha15 checksum. Set to an empty string \code{""} to skip the check.}
 
 \item{mirrors}{A vector Apache mirror sites. One is picked randomly.}
 
@@ -26,7 +28,7 @@ Logical if the installation was successful.
 }
 \description{
 This downloads and installs the Tika App \code{jar} (~60 MB) into a user directory,
-and verifies the integrity of the file using a md5 checksum.
+and verifies the integrity of the file using a checksum.
 The default settings should work fine.
 }
 \section{Details}{

@@ -15,30 +15,18 @@ This is an R interface to the Tika software.
 Installation
 ------------
 
-To start, you need R and `Java 8` or `OpenJDK 1.8`. Higher versions work. To check your version, run the command `java -version` from a terminal. Get Java installation tips at <http://openjdk.java.net/install/> or <https://www.java.com/en/download/help/download_options.xml>.
+To start, you need R and `Java 8` or `OpenJDK 1.8`. Higher versions work. To check your version, run the command `java -version` from a terminal. Get Java installation tips at <https://www.java.com/en/download/> or <http://openjdk.java.net/install/>. Because the `rJava` package is ***not*** required, installation is simple. You can cut and paste the following:
 
 ``` r
-# Get devtools to easily install from github, until this is all on CRAN 
-if(!requireNamespace('devtools')){
-  install.packages('devtools', 
-    repos = 'https://cloud.r-project.org')
-}
-
-if(!requireNamespace('rtika')){
- devtools::install_github('ropensci/rtika')
-}
+install.packages('rtika', repos = 'https://cloud.r-project.org')
 
 library('rtika')
 
- # You need to install the Apache Tika .jar once.
-if(is.na(tika_jar())){
- install_tika()
-}
+# You need to install the Apache Tika .jar once.
+rtika::install_tika()
 ```
 
-The `rJava` package is ***not*** required.
-
-Read an introductory article at <https://ropensci.github.io/rtika/articles/rtika_introduction.html>.
+Read an [introductory article](https://ropensci.github.io/rtika/articles/rtika_introduction.html) at <https://ropensci.github.io/rtika/articles/rtika_introduction.html>.
 
 Key Features
 ------------
@@ -80,7 +68,7 @@ Tika parses and extracts text or metadata from over one thousand digital formats
 -   Executable programs and libraries
 -   Crypto formats
 
-For a list of MIME types, see: <https://tika.apache.org/1.17/formats.html>
+For a list of MIME types, see: <https://tika.apache.org/1.18/formats.html>
 
 Get Plain Text
 --------------
@@ -119,10 +107,31 @@ cat(substr(text[1], 54, 190))
 
 To learn more and find out how to extract structured text and metadata, read the vignette: <https://ropensci.github.io/rtika/articles/rtika_introduction.html>.
 
-Similar Packages
-----------------
+Enhancements
+------------
 
-There is some overlap with many other text parsers, such as the R interface to antiword (See: <https://github.com/ropensci/antiword>). Listing all of them would take a huge amount of space, since Apache Tika processes over a thousand file types (See: <https://tika.apache.org/>). The main difference is that instead of specializing on a single format, Tika integrates dozens of specialist libraries from the Apache Foundation. Tika's unified approach offers a bit less control, and in return eases the parsing of digital archives filled with possibly unpredictable file types.
+Tika also integrates with the Tesseract OCR program, which extracts plain text from images of text. If Tesseract is installed, Tika will automatically use it for images and PDFs that contain images of text. To get that working, follow the [Tesseract installation instructions](https://github.com/tesseract-ocr/tesseract/wiki). The next time Tika is run, it should detect Tesseract. Alternately, you may try the [`tesseract`](https://github.com/ropensci/tesseract) package by @jeroen, which is a R interface to the required program and has several installation methods.
+
+The Apache Tika community welcomes your feedback. Issues regarding the R interface should be raised at the [`rTika` Github Issue Tracker](https://github.com/ropensci/tesseract). If you are confident the issue concerns Tika or one of its underlying parsers, use the [Tika Bugtracking System](https://issues.apache.org/jira/projects/TIKA/issues).
+
+Using the Tika App Directly
+---------------------------
+
+If your project or package needs to use the Tika App `.jar`, you can include `rTika` as a dependency and call the `rtika::tika_jar()` function to get the path to the installed Tika app on the system.
+
+Similar R Packages
+------------------
+
+The [`pdftools`](https://github.com/ropensci/pdftools) package extracts metadata and text from PDF files, the [`antiword`](https://github.com/ropensci/antiword) package extracts text from recent versions of Word, and the [`epubr`](https://github.com/ropensci/epubr) package by @leonawicz processes `epub` files. These do not depend on Java. Listing all of the similar packages would be an undertaking, since Apache Tika processes over a thousand file types.
+
+The big difference between Tika and a specialized parser is that Tika integrates dozens of specialist libraries maintained by the Apache Foundation. While Tika's unified approach offers a bit less control, it eases the processing of digital archives that contain unpredictable files.
+
+For example, researchers use Tika to process archives from court cases, governments, or the Internet Archive that span multiple years. These archives frequently contain diverse formats and multiple versions of each format. Because Tika finds the matching parser for each file, is well suited. In general, the parsing quality is very good.
+
+On the other hand, a specialized library may offer more options. For example, the [`tabulizer`](https://github.com/ropensci/tabulizer) package by @leeper and @tpaskhalis includes bindings to the 'Tabula PDF Table Extractor Library'. Because PDF files store tables as a series of positions with no clear boundaries, extracting a `data.frame` or `matrix` requires heuristics and customization. On the other hand, Tika extracts PDF tables as plain text. For those formats that store tables semantically, like Word, Tika extracts them as XHTML that can be turned into a `data.frame` using `rvest::html_table()`.
+
+History
+-------
 
 In September 2017, github.com user *kyusque* released `tikaR`, which uses the `rJava` package to interact with Tika (See: <https://github.com/kyusque/tikaR>). As of writing, it provided similar text and metadata extraction, but only `xml` output.
 
@@ -134,3 +143,5 @@ Code of Conduct
 ---------------
 
 Please note that this project is released with a [Contributor Code of Conduct](https://github.com/ropensci/rtika/blob/master/CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+[![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

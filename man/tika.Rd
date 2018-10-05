@@ -5,10 +5,10 @@
 \title{Main R Interface to 'Apache Tika'}
 \usage{
 tika(input, output = c("text", "jsonRecursive", "xml", "html")[1],
-  output_dir = "", return = TRUE, java = "java", jar = tika_jar(),
-  threads = 2, max_restarts = integer(), timeout = 3e+05,
-  max_file_size = integer(), args = character(), quiet = TRUE,
-  cleanup = TRUE, lib.loc = .libPaths())
+  output_dir = "", return = TRUE, java = rtika::java(),
+  jar = rtika::tika_jar(), threads = 2, max_restarts = integer(),
+  timeout = 3e+05, max_file_size = integer(), args = character(),
+  quiet = TRUE, cleanup = TRUE, lib.loc = .libPaths())
 }
 \arguments{
 \item{input}{Character vector describing the paths to the input documents.
@@ -75,7 +75,7 @@ Extract text or metadata from over a thousand file types.
 Get either plain text or structured \code{XHTML}.
 Metadata includes \code{Content-Type}, character encoding, and Exif data from
 jpeg or tiff images. See the long list of supported file types:
-\url{https://tika.apache.org/1.17/formats.html}.
+\url{https://tika.apache.org/1.19/formats.html}.
 }
 \section{Output Details}{
 
