@@ -12,7 +12,7 @@
 
 <meta name="author" content="Sasha Goodman" />
 
-<meta name="date" content="2018-10-05" />
+<meta name="date" content="2018-11-13" />
 
 <title>Introduction to rtika</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Introduction to rtika</h1>
 <h4 class="author"><em>Sasha Goodman</em></h4>
-<h4 class="date"><em>2018-10-05</em></h4>
+<h4 class="date"><em>2018-11-13</em></h4>
 
 
 
@@ -94,9 +94,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Video, sound and images are important, and yet much meaningful data remains numeric or textual. Tika can parse many formats and extract alpha-numeric characters, along with a few characters to control the arrangement of text, like line breaks.</p>
 <p>I recommend an analyst start with a directory on the computer and get a vector of paths to each file using <code>base::list.files()</code>. The commented code below has a recipe. Here, I use test files that are included with the package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-    
 <span class="kw">library</span>(<span class="st">'rtika'</span>)
 <span class="kw">library</span>(<span class="st">'magrittr'</span>)
+
 <span class="co"># Code to get ALL the files in my_path:</span>
 
 <span class="co"># my_path &lt;- &quot;~&quot;</span>
@@ -160,8 +160,8 @@ downloaded &lt;-<span class="st"> </span>
 
 <span class="co"># it will add the appropriate file extension to the downloads</span>
 downloaded
-<span class="co">#&gt; [1] &quot;/tmp/Rtmp5QAS8i/rtika_be032aeb1ca0/rtika_filebe0329169883.html&quot;</span>
-<span class="co">#&gt; [2] &quot;/tmp/Rtmp5QAS8i/rtika_be032aeb1ca0/rtika_filebe03558ff95c.pdf&quot;</span></code></pre></div>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpbExzCW/rtika_3fc5da8aa70/rtika_file3fc574ea8ca6.html&quot;</span>
+<span class="co">#&gt; [2] &quot;/tmp/RtmpbExzCW/rtika_3fc5da8aa70/rtika_file3fc529997d8d.pdf&quot;</span></code></pre></div>
 <p>This <code>tika_fetch()</code> function is used internally by the <code>tika()</code> functions when processing URLs. By using <code>tika_fetch()</code> explicitly with a specified directory, you can also save the files and return to them later.</p>
 </div>
 <div id="settings-for-big-datasets" class="section level1">
@@ -189,13 +189,13 @@ processed_files &lt;-<span class="st"> </span><span class="kw">file.path</span>(
                 )</code></pre></div>
 <p>The location of each file in <code>output_dir</code> follows a convention from the Apache Tika batch processor: the full path to each file mirrors the original file’s path, only within the <code>output_dir</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">processed_files
-<span class="co">#&gt; [1] &quot;/tmp/Rtmp5QAS8i/rtika_be03160990a8/tmp/RtmpM577s3/Rinstbde2132106fe/rtika/extdata/R-FAQ.html.txt&quot;         </span>
-<span class="co">#&gt; [2] &quot;/tmp/Rtmp5QAS8i/rtika_be03160990a8/tmp/RtmpM577s3/Rinstbde2132106fe/rtika/extdata/calculator.jpg.txt&quot;     </span>
-<span class="co">#&gt; [3] &quot;/tmp/Rtmp5QAS8i/rtika_be03160990a8/tmp/RtmpM577s3/Rinstbde2132106fe/rtika/extdata/curl.pdf.txt&quot;           </span>
-<span class="co">#&gt; [4] &quot;/tmp/Rtmp5QAS8i/rtika_be03160990a8/tmp/RtmpM577s3/Rinstbde2132106fe/rtika/extdata/jsonlite.pdf.txt&quot;       </span>
-<span class="co">#&gt; [5] &quot;/tmp/Rtmp5QAS8i/rtika_be03160990a8/tmp/RtmpM577s3/Rinstbde2132106fe/rtika/extdata/table.docx.txt&quot;         </span>
-<span class="co">#&gt; [6] &quot;/tmp/Rtmp5QAS8i/rtika_be03160990a8/tmp/RtmpM577s3/Rinstbde2132106fe/rtika/extdata/tika.apache.org.zip.txt&quot;</span>
-<span class="co">#&gt; [7] &quot;/tmp/Rtmp5QAS8i/rtika_be03160990a8/tmp/RtmpM577s3/Rinstbde2132106fe/rtika/extdata/xml2.pdf.txt&quot;</span></code></pre></div>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/R-FAQ.html.txt&quot;         </span>
+<span class="co">#&gt; [2] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/calculator.jpg.txt&quot;     </span>
+<span class="co">#&gt; [3] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/curl.pdf.txt&quot;           </span>
+<span class="co">#&gt; [4] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/jsonlite.pdf.txt&quot;       </span>
+<span class="co">#&gt; [5] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/table.docx.txt&quot;         </span>
+<span class="co">#&gt; [6] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/tika.apache.org.zip.txt&quot;</span>
+<span class="co">#&gt; [7] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/xml2.pdf.txt&quot;</span></code></pre></div>
 <p>Note that <code>tika_text()</code> produces <code>.txt</code> files, <code>tika_xml()</code> produces <code>.xml</code> files, <code>tika_html()</code> produces <code>.html</code> files, and both <code>tika_json()</code> and <code>tika_json_text()</code> produce <code>.json</code> files.</p>
 </div>
 <div id="get-a-structured-xhtml-rendition" class="section level1">
@@ -216,14 +216,14 @@ links &lt;-
 <span class="st">    </span><span class="kw">lapply</span>(xml2<span class="op">::</span>xml_attr, <span class="st">'href'</span>)
 
 <span class="kw">sample</span>(links[[<span class="dv">1</span>]],<span class="dv">10</span>)
-<span class="co">#&gt;  [1] &quot;http://docs.mongodb.org/manual/reference/program/mongoexport/#cmdoption--query&quot;</span>
-<span class="co">#&gt;  [2] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
-<span class="co">#&gt;  [3] &quot;http://ndjson.org&quot;                                                             </span>
-<span class="co">#&gt;  [4] &quot;http://github.com/jeroen/jsonlite/issues&quot;                                      </span>
-<span class="co">#&gt;  [5] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
+<span class="co">#&gt;  [1] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
+<span class="co">#&gt;  [2] &quot;https://www.opencpu.org/posts/jsonlite-a-smarter-json-encoder&quot;                 </span>
+<span class="co">#&gt;  [3] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
+<span class="co">#&gt;  [4] &quot;https://github.com/maxogden/dat&quot;                                               </span>
+<span class="co">#&gt;  [5] &quot;http://jsonlines.org/&quot;                                                         </span>
 <span class="co">#&gt;  [6] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
-<span class="co">#&gt;  [7] &quot;https://www.opencpu.org/posts/jsonlite-a-smarter-json-encoder&quot;                 </span>
-<span class="co">#&gt;  [8] &quot;http://jsonlines.org/&quot;                                                         </span>
+<span class="co">#&gt;  [7] &quot;http://docs.mongodb.org/manual/reference/program/mongoexport/#cmdoption--query&quot;</span>
+<span class="co">#&gt;  [8] &quot;http://ndjson.org&quot;                                                             </span>
 <span class="co">#&gt;  [9] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
 <span class="co">#&gt; [10] &quot;http://en.wikipedia.org/wiki/Singleton_(mathematics)&quot;</span></code></pre></div>
 <p>Each type of file has different information preserved by Tika’s internal parsers. The particular aspects vary. Some notes:</p>
@@ -264,7 +264,7 @@ html <span class="op">%&gt;%</span>
 <h1>Get Metadata in JSON Format</h1>
 <p>Metadata can also accessed with <code>tika_json()</code> and <code>tika_json_text()</code>. Consider all that can be found from a single image:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">'jsonlite'</span>)
-<span class="co">#batch &lt;- system.file(&quot;extdata&quot;, &quot;calculator.jpg&quot;, package = &quot;rtika&quot;)</span>
+<span class="co"># batch &lt;- system.file(&quot;extdata&quot;, &quot;calculator.jpg&quot;, package = &quot;rtika&quot;)</span>
 
 <span class="co"># a list of data.frames</span>
 metadata &lt;-
@@ -303,7 +303,7 @@ metadata &lt;-
 <span class="co">#&gt;  $ Exposure Program           : chr &quot;Program normal&quot;</span>
 <span class="co">#&gt;  $ Exposure Time              : chr &quot;1/30 sec&quot;</span>
 <span class="co">#&gt;  $ F-Number                   : chr &quot;f/2.2&quot;</span>
-<span class="co">#&gt;  $ File Modified Date         : chr &quot;Fri Oct 05 09:58:05 -07:00 2018&quot;</span>
+<span class="co">#&gt;  $ File Modified Date         : chr &quot;Tue Nov 13 11:57:40 -08:00 2018&quot;</span>
 <span class="co">#&gt;  $ File Name                  : chr &quot;calculator.jpg&quot;</span>
 <span class="co">#&gt;  $ File Size                  : chr &quot;83654 bytes&quot;</span>
 <span class="co">#&gt;  $ Flash                      : chr &quot;Flash did not fire&quot;</span>
@@ -361,7 +361,7 @@ metadata &lt;-
 <span class="co">#&gt;   ..$ : chr  &quot;org.apache.tika.parser.DefaultParser&quot; &quot;org.apache.tika.parser.ocr.TesseractOCRParser&quot; &quot;org.apache.tika.parser.jpeg.JpegParser&quot;</span>
 <span class="co">#&gt;  $ X-TIKA:content             : chr &quot;&lt;html xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;\n&lt;head&gt;\n&lt;meta name=\&quot;Exif Version\&quot; content=\&quot;2.21\&quot; /&gt;\n&lt;meta n&quot;| __truncated__</span>
 <span class="co">#&gt;  $ X-TIKA:digest:MD5          : chr &quot;1d6e398a96f058db680b7249beb8eeda&quot;</span>
-<span class="co">#&gt;  $ X-TIKA:parse_time_millis   : chr &quot;619&quot;</span>
+<span class="co">#&gt;  $ X-TIKA:parse_time_millis   : chr &quot;277&quot;</span>
 <span class="co">#&gt;  $ XMP Value Count            : chr &quot;4&quot;</span>
 <span class="co">#&gt;  $ Y Resolution               : chr &quot;72 dots per inch&quot;</span>
 <span class="co">#&gt;  $ date                       : chr &quot;2014-07-01T02:49:22&quot;</span>

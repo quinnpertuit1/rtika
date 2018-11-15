@@ -1,10 +1,12 @@
 ## ----setup, include = FALSE----------------------------------------------
+# only evaluate code if "NOT_CRAN"
 NOT_CRAN <- identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
 if(NOT_CRAN){
   if(is.na(rtika::tika_jar())){ rtika::install_tika() }  
 }
@@ -12,9 +14,9 @@ if(NOT_CRAN){
 
 ## ---- eval=NOT_CRAN------------------------------------------------------
 
-    
 library('rtika')
 library('magrittr')
+
 # Code to get ALL the files in my_path:
 
 # my_path <- "~"
@@ -130,7 +132,7 @@ unlist()
 
 ## ---- eval=NOT_CRAN------------------------------------------------------
 library('jsonlite')
-#batch <- system.file("extdata", "calculator.jpg", package = "rtika")
+# batch <- system.file("extdata", "calculator.jpg", package = "rtika")
 
 # a list of data.frames
 metadata <-
