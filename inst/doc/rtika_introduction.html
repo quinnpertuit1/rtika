@@ -12,14 +12,14 @@
 
 <meta name="author" content="Sasha Goodman" />
 
-<meta name="date" content="2018-11-13" />
+<meta name="date" content="2019-02-26" />
 
 <title>Introduction to rtika</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,7 +55,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -70,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Introduction to rtika</h1>
 <h4 class="author"><em>Sasha Goodman</em></h4>
-<h4 class="date"><em>2018-11-13</em></h4>
+<h4 class="date"><em>2019-02-26</em></h4>
 
 
 
@@ -130,17 +152,14 @@ text &lt;-<span class="st">  </span>
 <p>These issues should be rare. Tika works well on most documents, but if an archive is very large there may be a small percentage of unparsable files, and you might want to handle those.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Find which files had an issue</span>
 <span class="co"># Handle them if needed</span>
-batch[<span class="kw">which</span>(<span class="kw">is.na</span>(text))]
-<span class="co">#&gt; character(0)</span></code></pre></div>
+batch[<span class="kw">which</span>(<span class="kw">is.na</span>(text))]</code></pre></div>
 <p>Plain text is easy to search using <code>base::grep()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(text)
-<span class="co">#&gt; [1] 7</span>
 
 search &lt;-
 <span class="st">    </span>text[<span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">' is '</span>, <span class="dt">x =</span> text)]
 
-<span class="kw">length</span>(search)
-<span class="co">#&gt; [1] 6</span></code></pre></div>
+<span class="kw">length</span>(search)</code></pre></div>
 <p>With plain text, a variety of interesting analyses are possible, ranging from word counting to constructing matrices for deep learning. Much of this text processing is handled easily with the well documented <code>tidytext</code> package <span class="citation">(Silge and Robinson 2017)</span>. Among other things, it handles tokenization and creating term-document matrices.</p>
 </div>
 <div id="preserve-content-type-when-downloading" class="section level1">
@@ -159,9 +178,7 @@ downloaded &lt;-<span class="st"> </span>
 <span class="st">    </span><span class="kw">tika_fetch</span>(download_directory)
 
 <span class="co"># it will add the appropriate file extension to the downloads</span>
-downloaded
-<span class="co">#&gt; [1] &quot;/tmp/RtmpbExzCW/rtika_3fc5da8aa70/rtika_file3fc574ea8ca6.html&quot;</span>
-<span class="co">#&gt; [2] &quot;/tmp/RtmpbExzCW/rtika_3fc5da8aa70/rtika_file3fc529997d8d.pdf&quot;</span></code></pre></div>
+downloaded</code></pre></div>
 <p>This <code>tika_fetch()</code> function is used internally by the <code>tika()</code> functions when processing URLs. By using <code>tika_fetch()</code> explicitly with a specified directory, you can also save the files and return to them later.</p>
 </div>
 <div id="settings-for-big-datasets" class="section level1">
@@ -188,14 +205,7 @@ processed_files &lt;-<span class="st"> </span><span class="kw">file.path</span>(
                 <span class="dt">recursive =</span> <span class="ot">TRUE</span>)
                 )</code></pre></div>
 <p>The location of each file in <code>output_dir</code> follows a convention from the Apache Tika batch processor: the full path to each file mirrors the original file’s path, only within the <code>output_dir</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">processed_files
-<span class="co">#&gt; [1] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/R-FAQ.html.txt&quot;         </span>
-<span class="co">#&gt; [2] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/calculator.jpg.txt&quot;     </span>
-<span class="co">#&gt; [3] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/curl.pdf.txt&quot;           </span>
-<span class="co">#&gt; [4] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/jsonlite.pdf.txt&quot;       </span>
-<span class="co">#&gt; [5] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/table.docx.txt&quot;         </span>
-<span class="co">#&gt; [6] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/tika.apache.org.zip.txt&quot;</span>
-<span class="co">#&gt; [7] &quot;/tmp/RtmpbExzCW/rtika_3fc51563590a/tmp/RtmpjinM4g/Rinst3fa46daf63f2/rtika/extdata/xml2.pdf.txt&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">processed_files</code></pre></div>
 <p>Note that <code>tika_text()</code> produces <code>.txt</code> files, <code>tika_xml()</code> produces <code>.xml</code> files, <code>tika_html()</code> produces <code>.html</code> files, and both <code>tika_json()</code> and <code>tika_json_text()</code> produce <code>.json</code> files.</p>
 </div>
 <div id="get-a-structured-xhtml-rendition" class="section level1">
@@ -215,17 +225,7 @@ links &lt;-
 <span class="st">    </span><span class="kw">lapply</span>(xml2<span class="op">::</span>xml_find_all, <span class="st">'//a'</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">lapply</span>(xml2<span class="op">::</span>xml_attr, <span class="st">'href'</span>)
 
-<span class="kw">sample</span>(links[[<span class="dv">1</span>]],<span class="dv">10</span>)
-<span class="co">#&gt;  [1] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
-<span class="co">#&gt;  [2] &quot;https://www.opencpu.org/posts/jsonlite-a-smarter-json-encoder&quot;                 </span>
-<span class="co">#&gt;  [3] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
-<span class="co">#&gt;  [4] &quot;https://github.com/maxogden/dat&quot;                                               </span>
-<span class="co">#&gt;  [5] &quot;http://jsonlines.org/&quot;                                                         </span>
-<span class="co">#&gt;  [6] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
-<span class="co">#&gt;  [7] &quot;http://docs.mongodb.org/manual/reference/program/mongoexport/#cmdoption--query&quot;</span>
-<span class="co">#&gt;  [8] &quot;http://ndjson.org&quot;                                                             </span>
-<span class="co">#&gt;  [9] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
-<span class="co">#&gt; [10] &quot;http://en.wikipedia.org/wiki/Singleton_(mathematics)&quot;</span></code></pre></div>
+<span class="kw">sample</span>(links[[<span class="dv">1</span>]],<span class="dv">10</span>)</code></pre></div>
 <p>Each type of file has different information preserved by Tika’s internal parsers. The particular aspects vary. Some notes:</p>
 <ul>
 <li>PDF files retain pagination, with each page starting with the XHTML element <code>&lt;div class=&quot;page&quot;&gt;</code>.</li>
@@ -243,22 +243,12 @@ html <span class="op">%&gt;%</span>
 <span class="kw">lapply</span>(xml2<span class="op">::</span>xml_find_first, <span class="st">'//meta[@name=&quot;Content-Type&quot;]'</span>) <span class="op">%&gt;%</span>
 <span class="kw">lapply</span>(xml2<span class="op">::</span>xml_attr, <span class="st">'content'</span>) <span class="op">%&gt;%</span>
 <span class="kw">unlist</span>()
-<span class="co">#&gt; [1] &quot;application/pdf&quot;                                                        </span>
-<span class="co">#&gt; [2] &quot;application/pdf&quot;                                                        </span>
-<span class="co">#&gt; [3] &quot;application/vnd.openxmlformats-officedocument.wordprocessingml.document&quot;</span>
-<span class="co">#&gt; [4] &quot;application/pdf&quot;                                                        </span>
-<span class="co">#&gt; [5] &quot;text/html; charset=UTF-8&quot;                                               </span>
-<span class="co">#&gt; [6] &quot;image/jpeg&quot;                                                             </span>
-<span class="co">#&gt; [7] &quot;application/zip&quot;</span>
 
 <span class="co"># Creation-Date</span>
 html <span class="op">%&gt;%</span>
 <span class="kw">lapply</span>(xml2<span class="op">::</span>xml_find_first, <span class="st">'//meta[@name=&quot;Creation-Date&quot;]'</span>) <span class="op">%&gt;%</span>
 <span class="kw">lapply</span>(xml2<span class="op">::</span>xml_attr, <span class="st">'content'</span>) <span class="op">%&gt;%</span>
-<span class="kw">unlist</span>()
-<span class="co">#&gt; [1] &quot;2017-06-01T12:03:38Z&quot; &quot;2017-12-12T22:21:00Z&quot; &quot;2018-03-02T20:40:00Z&quot;</span>
-<span class="co">#&gt; [4] &quot;2018-01-23T14:02:32Z&quot; NA                     &quot;2014-07-01T02:49:22&quot; </span>
-<span class="co">#&gt; [7] NA</span></code></pre></div>
+<span class="kw">unlist</span>()</code></pre></div>
 </div>
 <div id="get-metadata-in-json-format" class="section level1">
 <h1>Get Metadata in JSON Format</h1>
@@ -273,114 +263,10 @@ metadata &lt;-
 <span class="st">    </span><span class="kw">lapply</span>(jsonlite<span class="op">::</span>fromJSON)
 
 <span class="co"># look at metadata for an image</span>
-<span class="kw">str</span>(metadata[[<span class="dv">6</span>]])
-<span class="co">#&gt; 'data.frame':    1 obs. of  115 variables:</span>
-<span class="co">#&gt;  $ Aperture Value             : chr &quot;f/2.2&quot;</span>
-<span class="co">#&gt;  $ Application Record Version : chr &quot;2&quot;</span>
-<span class="co">#&gt;  $ Brightness Value           : chr &quot;5825/1686&quot;</span>
-<span class="co">#&gt;  $ Caption Digest             : chr &quot;158 218 29 133 38 133 242 158 59 205 21 44 236 23 180 123&quot;</span>
-<span class="co">#&gt;  $ Coded Character Set        : chr &quot;UTF-8&quot;</span>
-<span class="co">#&gt;  $ Color Space                : chr &quot;sRGB&quot;</span>
-<span class="co">#&gt;  $ Component 1                : chr &quot;Y component: Quantization table 0, Sampling factors 2 horiz/2 vert&quot;</span>
-<span class="co">#&gt;  $ Component 2                : chr &quot;Cb component: Quantization table 1, Sampling factors 1 horiz/1 vert&quot;</span>
-<span class="co">#&gt;  $ Component 3                : chr &quot;Cr component: Quantization table 1, Sampling factors 1 horiz/1 vert&quot;</span>
-<span class="co">#&gt;  $ Components Configuration   : chr &quot;YCbCr&quot;</span>
-<span class="co">#&gt;  $ Compression Type           : chr &quot;Baseline&quot;</span>
-<span class="co">#&gt;  $ Content-Length             : chr &quot;83654&quot;</span>
-<span class="co">#&gt;  $ Content-Type               : chr &quot;image/jpeg&quot;</span>
-<span class="co">#&gt;  $ Creation-Date              : chr &quot;2014-07-01T02:49:22&quot;</span>
-<span class="co">#&gt;  $ Data Precision             : chr &quot;8 bits&quot;</span>
-<span class="co">#&gt;  $ Date Created               : chr &quot;2014:07:01&quot;</span>
-<span class="co">#&gt;  $ Date/Time                  : chr &quot;2014:07:01 09:49:22&quot;</span>
-<span class="co">#&gt;  $ Date/Time Digitized        : chr &quot;2014:07:01 09:49:22&quot;</span>
-<span class="co">#&gt;  $ Date/Time Original         : chr &quot;2014:07:01 09:49:22&quot;</span>
-<span class="co">#&gt;  $ Digital Date Created       : chr &quot;2014:07:01&quot;</span>
-<span class="co">#&gt;  $ Digital Time Created       : chr &quot;09:49:22&quot;</span>
-<span class="co">#&gt;  $ Exif Image Height          : chr &quot;800 pixels&quot;</span>
-<span class="co">#&gt;  $ Exif Image Width           : chr &quot;600 pixels&quot;</span>
-<span class="co">#&gt;  $ Exif Version               : chr &quot;2.21&quot;</span>
-<span class="co">#&gt;  $ Exposure Mode              : chr &quot;Auto exposure&quot;</span>
-<span class="co">#&gt;  $ Exposure Program           : chr &quot;Program normal&quot;</span>
-<span class="co">#&gt;  $ Exposure Time              : chr &quot;1/30 sec&quot;</span>
-<span class="co">#&gt;  $ F-Number                   : chr &quot;f/2.2&quot;</span>
-<span class="co">#&gt;  $ File Modified Date         : chr &quot;Tue Nov 13 11:57:40 -08:00 2018&quot;</span>
-<span class="co">#&gt;  $ File Name                  : chr &quot;calculator.jpg&quot;</span>
-<span class="co">#&gt;  $ File Size                  : chr &quot;83654 bytes&quot;</span>
-<span class="co">#&gt;  $ Flash                      : chr &quot;Flash did not fire&quot;</span>
-<span class="co">#&gt;  $ FlashPix Version           : chr &quot;1.00&quot;</span>
-<span class="co">#&gt;  $ Focal Length               : chr &quot;4.1 mm&quot;</span>
-<span class="co">#&gt;  $ Focal Length 35            : chr &quot;30 mm&quot;</span>
-<span class="co">#&gt;  $ GPS Altitude               : chr &quot;95 metres&quot;</span>
-<span class="co">#&gt;  $ GPS Altitude Ref           : chr &quot;Sea level&quot;</span>
-<span class="co">#&gt;  $ GPS Date Stamp             : chr &quot;2014:07:01&quot;</span>
-<span class="co">#&gt;  $ GPS Latitude               : chr &quot;34° 4' 19.22\&quot;&quot;</span>
-<span class="co">#&gt;  $ GPS Latitude Ref           : chr &quot;N&quot;</span>
-<span class="co">#&gt;  $ GPS Longitude              : chr &quot;-118° 26' 58.48\&quot;&quot;</span>
-<span class="co">#&gt;  $ GPS Longitude Ref          : chr &quot;W&quot;</span>
-<span class="co">#&gt;  $ GPS Time-Stamp             : chr &quot;16:49:21.000 UTC&quot;</span>
-<span class="co">#&gt;  $ GPS Version ID             : chr &quot;2.200&quot;</span>
-<span class="co">#&gt;  $ ISO Speed Ratings          : chr &quot;50&quot;</span>
-<span class="co">#&gt;  $ Image Height               : chr &quot;800 pixels&quot;</span>
-<span class="co">#&gt;  $ Image Width                : chr &quot;600 pixels&quot;</span>
-<span class="co">#&gt;  $ Last-Modified              : chr &quot;2014-07-01T02:49:22&quot;</span>
-<span class="co">#&gt;  $ Last-Save-Date             : chr &quot;2014-07-01T02:49:22&quot;</span>
-<span class="co">#&gt;  $ Lens Make                  : chr &quot;Apple&quot;</span>
-<span class="co">#&gt;  $ Lens Model                 : chr &quot;iPhone 5s back camera 4.12mm f/2.2&quot;</span>
-<span class="co">#&gt;  $ Lens Specification         : chr &quot;4.12mm f/2.2&quot;</span>
-<span class="co">#&gt;  $ Make                       : chr &quot;Apple&quot;</span>
-<span class="co">#&gt;  $ Metering Mode              : chr &quot;Spot&quot;</span>
-<span class="co">#&gt;  $ Model                      : chr &quot;iPhone 5s&quot;</span>
-<span class="co">#&gt;  $ Number of Components       : chr &quot;3&quot;</span>
-<span class="co">#&gt;  $ Number of Tables           : chr &quot;4 Huffman tables&quot;</span>
-<span class="co">#&gt;  $ Orientation                : chr &quot;Top, left side (Horizontal / normal)&quot;</span>
-<span class="co">#&gt;  $ Resolution Unit            : chr &quot;Inch&quot;</span>
-<span class="co">#&gt;  $ Resolution Units           : chr &quot;none&quot;</span>
-<span class="co">#&gt;  $ Run Time                   : chr &quot;[104 values]&quot;</span>
-<span class="co">#&gt;  $ Scene Capture Type         : chr &quot;Standard&quot;</span>
-<span class="co">#&gt;  $ Scene Type                 : chr &quot;Directly photographed image&quot;</span>
-<span class="co">#&gt;  $ Sensing Method             : chr &quot;One-chip color area sensor&quot;</span>
-<span class="co">#&gt;  $ Shutter Speed Value        : chr &quot;1/30 sec&quot;</span>
-<span class="co">#&gt;  $ Software                   : chr &quot;7.1.1&quot;</span>
-<span class="co">#&gt;  $ Sub-Sec Time Digitized     : chr &quot;854&quot;</span>
-<span class="co">#&gt;  $ Sub-Sec Time Original      : chr &quot;854&quot;</span>
-<span class="co">#&gt;  $ Subject Location           : chr &quot;1956 873 610 612&quot;</span>
-<span class="co">#&gt;  $ Thumbnail Height Pixels    : chr &quot;0&quot;</span>
-<span class="co">#&gt;  $ Thumbnail Width Pixels     : chr &quot;0&quot;</span>
-<span class="co">#&gt;  $ Time Created               : chr &quot;09:49:22&quot;</span>
-<span class="co">#&gt;  $ Unique Image ID            : chr &quot;bdeb111183eae36c0000000000000000&quot;</span>
-<span class="co">#&gt;  $ Unknown tag (0x0001)       : chr &quot;0&quot;</span>
-<span class="co">#&gt;  $ Unknown tag (0x0002)       : chr &quot;[558 values]&quot;</span>
-<span class="co">#&gt;  $ Unknown tag (0x0004)       : chr &quot;1&quot;</span>
-<span class="co">#&gt;  $ Unknown tag (0x0005)       : chr &quot;159&quot;</span>
-<span class="co">#&gt;  $ Unknown tag (0x0006)       : chr &quot;163&quot;</span>
-<span class="co">#&gt;  $ Unknown tag (0x0007)       : chr &quot;1&quot;</span>
-<span class="co">#&gt;  $ Unknown tag (0x0009)       : chr &quot;19&quot;</span>
-<span class="co">#&gt;  $ White Balance Mode         : chr &quot;Auto white balance&quot;</span>
-<span class="co">#&gt;  $ X Resolution               : chr &quot;72 dots per inch&quot;</span>
-<span class="co">#&gt;  $ X-Parsed-By                :List of 1</span>
-<span class="co">#&gt;   ..$ : chr  &quot;org.apache.tika.parser.DefaultParser&quot; &quot;org.apache.tika.parser.ocr.TesseractOCRParser&quot; &quot;org.apache.tika.parser.jpeg.JpegParser&quot;</span>
-<span class="co">#&gt;  $ X-TIKA:content             : chr &quot;&lt;html xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;\n&lt;head&gt;\n&lt;meta name=\&quot;Exif Version\&quot; content=\&quot;2.21\&quot; /&gt;\n&lt;meta n&quot;| __truncated__</span>
-<span class="co">#&gt;  $ X-TIKA:digest:MD5          : chr &quot;1d6e398a96f058db680b7249beb8eeda&quot;</span>
-<span class="co">#&gt;  $ X-TIKA:parse_time_millis   : chr &quot;277&quot;</span>
-<span class="co">#&gt;  $ XMP Value Count            : chr &quot;4&quot;</span>
-<span class="co">#&gt;  $ Y Resolution               : chr &quot;72 dots per inch&quot;</span>
-<span class="co">#&gt;  $ date                       : chr &quot;2014-07-01T02:49:22&quot;</span>
-<span class="co">#&gt;  $ dcterms:created            : chr &quot;2014-07-01T02:49:22&quot;</span>
-<span class="co">#&gt;  $ dcterms:modified           : chr &quot;2014-07-01T02:49:22&quot;</span>
-<span class="co">#&gt;  $ exif:DateTimeOriginal      : chr &quot;2014-07-01T02:49:22&quot;</span>
-<span class="co">#&gt;  $ exif:ExposureTime          : chr &quot;0.03333333333333333&quot;</span>
-<span class="co">#&gt;  $ exif:FNumber               : chr &quot;2.2&quot;</span>
-<span class="co">#&gt;  $ exif:Flash                 : chr &quot;false&quot;</span>
-<span class="co">#&gt;  $ exif:FocalLength           : chr &quot;4.12&quot;</span>
-<span class="co">#&gt;  $ exif:IsoSpeedRatings       : chr &quot;50&quot;</span>
-<span class="co">#&gt;  $ geo:lat                    : chr &quot;34.072006&quot;</span>
-<span class="co">#&gt;  $ geo:long                   : chr &quot;-118.449578&quot;</span>
-<span class="co">#&gt;   [list output truncated]</span></code></pre></div>
+<span class="kw">str</span>(metadata[[<span class="dv">6</span>]])</code></pre></div>
 <p>In addition, each specific format can have its own specialized metadata fields. For example, photos sometimes store latitude and longitude:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata[[<span class="dv">6</span>]]<span class="op">$</span><span class="st">'geo:lat'</span>
-<span class="co">#&gt; [1] &quot;34.072006&quot;</span>
-metadata[[<span class="dv">6</span>]]<span class="op">$</span><span class="st">'geo:long'</span>
-<span class="co">#&gt; [1] &quot;-118.449578&quot;</span></code></pre></div>
+metadata[[<span class="dv">6</span>]]<span class="op">$</span><span class="st">'geo:long'</span></code></pre></div>
 </div>
 <div id="get-metadata-from-container-documents" class="section level1">
 <h1>Get Metadata from “Container” Documents</h1>
@@ -405,40 +291,19 @@ embedded_resource_path &lt;-<span class="st"> </span>
 <span class="st">    </span>metadata <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">lapply</span>(<span class="cf">function</span>(x){ x<span class="op">$</span><span class="st">'X-TIKA:embedded_resource_path'</span> }) 
 
-embedded_resource_path
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt;  [1] NA                       &quot;/index.html&quot;           </span>
-<span class="co">#&gt;  [3] &quot;/site.css&quot;              &quot;/external.png&quot;         </span>
-<span class="co">#&gt;  [5] &quot;/icon_info_sml.gif&quot;     &quot;/icon_warning_sml.gif&quot; </span>
-<span class="co">#&gt;  [7] &quot;/icon_error_sml.gif&quot;    &quot;/icon_success_sml.gif&quot; </span>
-<span class="co">#&gt;  [9] &quot;/tika.png&quot;              &quot;/mattmann_cover150.jpg&quot;</span>
-<span class="co">#&gt; [11] &quot;/asf-logo.gif&quot;</span></code></pre></div>
+embedded_resource_path</code></pre></div>
 <p>The <code>X-TIKA:embedded_resource_path</code> field tells you where in the document hierarchy each object resides. The first item in the character vector is the root, which is the container itself. The other items are embedded one layer down, as indicated by the forward slash <code>/</code>. In the context of the <code>X-TIKA:embedded_resource_path</code> field, paths are not literally directory paths like in a file system. In reality, the image <code>icon_info_sml.gif</code> is within a folder called <code>images</code>. Rather, the number of forward slashes indicates the level of recursion within the document. One slash <code>/</code> reveals a first set of embedded documents. Additional slashes <code>/</code> indicate that the parser has recursed into an embedded document within an embedded document.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">content_type &lt;-
 <span class="st">    </span>metadata <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">lapply</span>(<span class="cf">function</span>(x){ x<span class="op">$</span><span class="st">'Content-Type'</span> }) 
 
-content_type
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt;  [1] &quot;application/zip&quot;                     </span>
-<span class="co">#&gt;  [2] &quot;application/xhtml+xml; charset=UTF-8&quot;</span>
-<span class="co">#&gt;  [3] &quot;text/css; charset=ISO-8859-1&quot;        </span>
-<span class="co">#&gt;  [4] &quot;image/png&quot;                           </span>
-<span class="co">#&gt;  [5] &quot;image/gif&quot;                           </span>
-<span class="co">#&gt;  [6] &quot;image/gif&quot;                           </span>
-<span class="co">#&gt;  [7] &quot;image/gif&quot;                           </span>
-<span class="co">#&gt;  [8] &quot;image/gif&quot;                           </span>
-<span class="co">#&gt;  [9] &quot;image/png&quot;                           </span>
-<span class="co">#&gt; [10] &quot;image/jpeg&quot;                          </span>
-<span class="co">#&gt; [11] &quot;image/gif&quot;</span></code></pre></div>
+content_type</code></pre></div>
 <p>The <code>Content-Type</code> metadata reveals the first item is the container and has the type <code>application/zip</code>. The items after that are deeper and include web formats such as <code>application/xhtml+xml</code>, <code>image/png</code>, and <code>text/css</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">content &lt;-<span class="st"> </span>
 <span class="st">     </span>metadata <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">lapply</span>(<span class="cf">function</span>(x){ x<span class="op">$</span><span class="st">'X-TIKA:content'</span> })
 
-<span class="kw">str</span>(content)
-<span class="co">#&gt; List of 1</span>
-<span class="co">#&gt;  $ : chr [1:11] &quot;&lt;html xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;\n&lt;head&gt;\n&lt;meta name=\&quot;X-Parsed-By\&quot; content=\&quot;org.apache.tika.par&quot;| __truncated__ &quot;&lt;html xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;\n&lt;head&gt;\n&lt;link rel=\&quot;icon\&quot; type=\&quot;image/png\&quot; href=\&quot;./tikaNoTex&quot;| __truncated__ &quot;&lt;html xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;\n&lt;head&gt;\n&lt;meta name=\&quot;date\&quot; content=\&quot;2014-12-20T07:36:10Z\&quot; /&gt;\&quot;| __truncated__ &quot;&lt;html xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;\n&lt;head&gt;\n&lt;meta name=\&quot;date\&quot; content=\&quot;2010-08-05T13:48:24Z\&quot; /&gt;\&quot;| __truncated__ ...</span></code></pre></div>
+<span class="kw">str</span>(content)</code></pre></div>
 <p>The <code>X-TIKA:content</code> field includes the XHTML rendition of an object. It is possible to extract plain text in the <code>X-TIKA:content</code> field by calling <code>tika_json_text()</code> instead. That is the only difference between <code>tika_json()</code> and <code>tika_json_text()</code>.</p>
 <p>It may be surprising to learn that Word documents are containers (at least the modern <code>.docx</code> variety are). By parsing them with <code>tika_json()</code> or <code>tika_json_text()</code>, the various images and embedded objects can be analyzed. However, there is an added complexity, because each document may produce a long vector of <code>Content-Types</code> for each embedded file, instead of a single <code>Content-Type</code> for the container like <code>tika_xml()</code> and <code>tika_html()</code>.</p>
 </div>

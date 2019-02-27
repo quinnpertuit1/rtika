@@ -6,9 +6,9 @@
 #'
 #' @param version The declared Tika version
 #' @param digest The sha15 checksum. Set to an empty string \code{""} to skip the check.
-#' @param mirrors A vector Apache mirror sites. One is picked randomly.
+#' @param mirrors A vector of Apache mirror sites. One is picked randomly.
 #' @param retries The number of times to try the download.
-#' @param url Optional url of a particular file to download. Will override downloading from random mirrors.
+#' @param url Optional url to a particular location of the tika app. Setting this to any character string overrides downloading from random mirrors.
 #'
 #' @return Logical if the installation was successful.
 #' @examples
@@ -53,10 +53,10 @@
 #'
 #' @export
 
-install_tika <- function(version = "1.19.1",
-                         digest = paste0("629c09b60797d785571d0717aa39e1e27555c258994",
-                                         "624f70181c33219e939126582e1dd4b72478c468667",
-                                         "f998c3d173d251dcb752a85e285278e0c9f9b961c1"),
+install_tika <- function(version = "1.20",
+                         digest = paste0("ae1020a5913a880b1b8b821acd638756e",
+                                         "879a4a721dda4d7d3d39425dd4e1394028d7d88b675",
+                                         "e45a0365bd5bbcdacd6d66de733a3ae8cb829a7c20a696d070ca"),
                          mirrors = c(
                            "http://mirrors.ocf.berkeley.edu/apache/tika/",
                            "http://apache.cs.utah.edu/tika/",

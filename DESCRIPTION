@@ -1,7 +1,7 @@
 Package: rtika
 Type: Package
 Title: R Interface to 'Apache Tika'
-Version: 1.19.1
+Version: 1.20
 Authors@R: c(
     person(given = "Sasha", family = "Goodman", email="goodmansasha@gmail.com", role=c("aut","cre") ), 
     person(given = "The Apache Software Foundation", role=c("aut","cph") ),
@@ -17,12 +17,12 @@ Description: Extract text or metadata from over a thousand file types, using Apa
 Depends: R (>= 3.1.0)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 URL: http://github.com/ropensci/rtika
 BugReports: http://github.com/ropensci/rtika/issues
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-11-13 19:58:13 UTC; project
+Packaged: 2019-02-26 20:34:39 UTC; sasha
 Author: Sasha Goodman [aut, cre],
   The Apache Software Foundation [aut, cph],
   Julia Silge [rev] (Reviewed the package for rOpenSci, see
@@ -30,4 +30,4 @@ Author: Sasha Goodman [aut, cre],
   David Gohel [rev] (Reviewed the package for rOpenSci, see
     https://github.com/ropensci/onboarding/issues/191)
 Repository: CRAN
-Date/Publication: 2018-11-15 08:50:03 UTC
+Date/Publication: 2019-02-27 22:00:03 UTC
