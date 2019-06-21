@@ -15,7 +15,8 @@ tika(input, output = c("text", "jsonRecursive", "xml", "html")[1],
 \arguments{
 \item{input}{Character vector describing the paths to the input documents.
 Strings starting with 'http://','https://', or 'ftp://' are downloaded to a
-temporary directory first. Each file will be read, but not modified.}
+temporary directory. On Windows, the local paths cannot span
+drives because of a Windows convention.}
 
 \item{output}{Optional character vector of the output format. The default,
 \code{"text"}, gets plain text without metadata. \code{"xml"} and
@@ -49,7 +50,7 @@ before the process is killed and restarted. Defaults to 300000.}
 \item{max_file_size}{Integer of the maximum bytes allowed.
 Do not process files larger than this. The default is unlimited.}
 
-\item{config}{Path to the XML config file. Defaults to \code{system.file("extdata", "ocr.xml", package = "rtika")}'. There is a \code{no-ocr.xml} version.}
+\item{config}{Path to the XML config file. Defaults to \code{system.file("extdata", "ocr.xml", package = "rtika")}'. There is also a \code{no-ocr.xml} file available.}
 
 \item{args}{Optional character vector of additional arguments passed to Tika,
 that may not yet be implemented in this R interface, in the pattern of

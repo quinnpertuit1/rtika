@@ -163,6 +163,11 @@ tika <- function(input,
 
   # Special thanks to Hadley the git tutorial at:
   # http://r-pkgs.had.co.nz/git.html
+    
+    # To update tika version, update 
+    # (1) the DESCRIPTION of the Version
+    # (2) the zzz.R file variable: tika_jar_tested_version 
+    # (3) the install_tika version and digest
 
   # When updating the package, run these functions in order:
   # devtools::document() # sets up NAMESPACE and .Rd documentation files to match function
@@ -212,7 +217,6 @@ tika <- function(input,
     class(max_file_size) %in% c("integer", "numeric"),
     length(max_file_size) <= 1,
     class(config) == 'character',
-    nchar(config) > 0,
     class(args) == "character",
     class(quiet) == "logical",
     class(cleanup) == "logical",
@@ -329,6 +333,7 @@ tika <- function(input,
   maxRestarts <- character()
   timeoutThresholdMillis <- character()
   maxFileSizeBytes <- character()
+  configTika <- character()
 
   if (length(threads) > 0) {
     numConsumers <- c("-numConsumers", as.character(as.integer(threads)))
@@ -346,6 +351,9 @@ tika <- function(input,
     maxFileSizeBytes <- c("-maxFileSizeBytes", as.character(as.integer(max_file_size)))
   }
   
+  if (length(config) > 0 && nchar(config[1]) > 0) {
+      configTika <- c("-c", config[1])
+  }
   
   
     java_args <- c(
@@ -355,7 +363,7 @@ tika <- function(input,
       maxRestarts,
       timeoutThresholdMillis,
       maxFileSizeBytes,
-      c('-c', config),
+      configTika,
       args, output_flag, "-i", root,
       "-o", output_dir,
       "-fileList", fileList
