@@ -3,8 +3,9 @@
 #' Extract text or metadata from over a thousand file types.
 #' Get either plain text or structured \code{XHTML}.
 #' Metadata includes \code{Content-Type}, character encoding, and Exif data from
-#' jpeg or tiff images. See the long list of supported file types:
-#' \url{https://tika.apache.org/1.19/formats.html}.
+#' jpeg or tiff images. See the long list of supported file types, 
+#' click the "Supported Formats" link on this page :
+#' \url{https://tika.apache.org/}.
 #'
 #' @param input Character vector describing the paths to the input documents.
 #' Strings starting with 'http://','https://', or 'ftp://' are downloaded to a
@@ -168,6 +169,7 @@ tika <- function(input,
     # (1) the DESCRIPTION of the Version
     # (2) the zzz.R file variable: tika_jar_tested_version 
     # (3) the install_tika version and digest
+    # (4) the NEWS.md to the verision
 
   # When updating the package, run these functions in order:
   # devtools::document() # sets up NAMESPACE and .Rd documentation files to match function

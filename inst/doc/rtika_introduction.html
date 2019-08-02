@@ -12,7 +12,7 @@
 
 <meta name="author" content="Sasha Goodman" />
 
-<meta name="date" content="2019-06-21" />
+<meta name="date" content="2019-08-01" />
 
 <title>Introduction to rtika</title>
 
@@ -95,7 +95,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Introduction to rtika</h1>
 <h4 class="author">Sasha Goodman</h4>
-<h4 class="date">2019-06-21</h4>
+<h4 class="date">2019-08-01</h4>
 
 
 
@@ -185,8 +185,8 @@ downloaded &lt;-<span class="st"> </span>
 
 <span class="co"># it will add the appropriate file extension to the downloads</span>
 downloaded
-<span class="co">#&gt; [1] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpgI6Abi/rtika_170454284b7d/rtika_file1704217426b5.html&quot;</span>
-<span class="co">#&gt; [2] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpgI6Abi/rtika_170454284b7d/rtika_file17045099463b.pdf&quot;</span></code></pre></div>
+<span class="co">#&gt; [1] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFF1ICT/rtika_1dca7d65c49c/rtika_file1dca244f1e15.html&quot;</span>
+<span class="co">#&gt; [2] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFF1ICT/rtika_1dca7d65c49c/rtika_file1dca46400752.pdf&quot;</span></code></pre></div>
 <p>This <code>tika_fetch()</code> function is used internally by the <code>tika()</code> functions when processing URLs. By using <code>tika_fetch()</code> explicitly with a specified directory, you can also save the files and return to them later.</p>
 </div>
 <div id="settings-for-big-datasets" class="section level1">
@@ -214,13 +214,13 @@ processed_files &lt;-<span class="st"> </span><span class="kw">file.path</span>(
                 )</code></pre></div>
 <p>The location of each file in <code>output_dir</code> follows a convention from the Apache Tika batch processor: the full path to each file mirrors the original file’s path, only within the <code>output_dir</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">processed_files
-<span class="co">#&gt; [1] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpgI6Abi/rtika_1704a2089b1/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/Rtmpw1GQIK/Rinst16f32c5f1066/rtika/extdata/R-FAQ.html.txt&quot;         </span>
-<span class="co">#&gt; [2] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpgI6Abi/rtika_1704a2089b1/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/Rtmpw1GQIK/Rinst16f32c5f1066/rtika/extdata/calculator.jpg.txt&quot;     </span>
-<span class="co">#&gt; [3] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpgI6Abi/rtika_1704a2089b1/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/Rtmpw1GQIK/Rinst16f32c5f1066/rtika/extdata/curl.pdf.txt&quot;           </span>
-<span class="co">#&gt; [4] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpgI6Abi/rtika_1704a2089b1/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/Rtmpw1GQIK/Rinst16f32c5f1066/rtika/extdata/jsonlite.pdf.txt&quot;       </span>
-<span class="co">#&gt; [5] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpgI6Abi/rtika_1704a2089b1/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/Rtmpw1GQIK/Rinst16f32c5f1066/rtika/extdata/table.docx.txt&quot;         </span>
-<span class="co">#&gt; [6] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpgI6Abi/rtika_1704a2089b1/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/Rtmpw1GQIK/Rinst16f32c5f1066/rtika/extdata/tika.apache.org.zip.txt&quot;</span>
-<span class="co">#&gt; [7] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpgI6Abi/rtika_1704a2089b1/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/Rtmpw1GQIK/Rinst16f32c5f1066/rtika/extdata/xml2.pdf.txt&quot;</span></code></pre></div>
+<span class="co">#&gt; [1] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFF1ICT/rtika_1dca6bb90c81/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFbx8WH/Rinst1db965eec12c/rtika/extdata/R-FAQ.html.txt&quot;         </span>
+<span class="co">#&gt; [2] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFF1ICT/rtika_1dca6bb90c81/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFbx8WH/Rinst1db965eec12c/rtika/extdata/calculator.jpg.txt&quot;     </span>
+<span class="co">#&gt; [3] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFF1ICT/rtika_1dca6bb90c81/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFbx8WH/Rinst1db965eec12c/rtika/extdata/curl.pdf.txt&quot;           </span>
+<span class="co">#&gt; [4] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFF1ICT/rtika_1dca6bb90c81/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFbx8WH/Rinst1db965eec12c/rtika/extdata/jsonlite.pdf.txt&quot;       </span>
+<span class="co">#&gt; [5] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFF1ICT/rtika_1dca6bb90c81/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFbx8WH/Rinst1db965eec12c/rtika/extdata/table.docx.txt&quot;         </span>
+<span class="co">#&gt; [6] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFF1ICT/rtika_1dca6bb90c81/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFbx8WH/Rinst1db965eec12c/rtika/extdata/tika.apache.org.zip.txt&quot;</span>
+<span class="co">#&gt; [7] &quot;/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFF1ICT/rtika_1dca6bb90c81/private/var/folders/nr/74rgb64s3n98yccxwbv6vsxw0000gn/T/RtmpFbx8WH/Rinst1db965eec12c/rtika/extdata/xml2.pdf.txt&quot;</span></code></pre></div>
 <p>Note that <code>tika_text()</code> produces <code>.txt</code> files, <code>tika_xml()</code> produces <code>.xml</code> files, <code>tika_html()</code> produces <code>.html</code> files, and both <code>tika_json()</code> and <code>tika_json_text()</code> produce <code>.json</code> files.</p>
 </div>
 <div id="get-a-structured-xhtml-rendition" class="section level1">
@@ -241,16 +241,16 @@ links &lt;-
 <span class="st">    </span><span class="kw">lapply</span>(xml2<span class="op">::</span>xml_attr, <span class="st">'href'</span>)
 
 <span class="kw">sample</span>(links[[<span class="dv">1</span>]],<span class="dv">10</span>)
-<span class="co">#&gt;  [1] &quot;http://ndjson.org&quot;                                                             </span>
+<span class="co">#&gt;  [1] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
 <span class="co">#&gt;  [2] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
-<span class="co">#&gt;  [3] &quot;https://www.opencpu.org/posts/jsonlite-a-smarter-json-encoder&quot;                 </span>
-<span class="co">#&gt;  [4] &quot;http://en.wikipedia.org/wiki/Singleton_(mathematics)&quot;                          </span>
-<span class="co">#&gt;  [5] &quot;http://github.com/jeroen/jsonlite/issues&quot;                                      </span>
-<span class="co">#&gt;  [6] &quot;https://github.com/maxogden/dat&quot;                                               </span>
-<span class="co">#&gt;  [7] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
-<span class="co">#&gt;  [8] &quot;http://docs.mongodb.org/manual/reference/program/mongoexport/#cmdoption--query&quot;</span>
+<span class="co">#&gt;  [3] &quot;http://github.com/jeroen/jsonlite/issues&quot;                                      </span>
+<span class="co">#&gt;  [4] &quot;http://docs.mongodb.org/manual/reference/program/mongoexport/#cmdoption--query&quot;</span>
+<span class="co">#&gt;  [5] &quot;http://ndjson.org&quot;                                                             </span>
+<span class="co">#&gt;  [6] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
+<span class="co">#&gt;  [7] &quot;https://www.opencpu.org/posts/jsonlite-a-smarter-json-encoder&quot;                 </span>
+<span class="co">#&gt;  [8] &quot;http://jsonlines.org/&quot;                                                         </span>
 <span class="co">#&gt;  [9] &quot;https://arxiv.org/abs/1403.2805&quot;                                               </span>
-<span class="co">#&gt; [10] &quot;http://docs.mongodb.org/manual/reference/program/mongoexport/#cmdoption--query&quot;</span></code></pre></div>
+<span class="co">#&gt; [10] &quot;http://en.wikipedia.org/wiki/Singleton_(mathematics)&quot;</span></code></pre></div>
 <p>Each type of file has different information preserved by Tika’s internal parsers. The particular aspects vary. Some notes:</p>
 <ul>
 <li>PDF files retain pagination, with each page starting with the XHTML element <code>&lt;div class=&quot;page&quot;&gt;</code>.</li>
@@ -328,7 +328,7 @@ metadata &lt;-
 <span class="co">#&gt;  $ Exposure Program           : chr &quot;Program normal&quot;</span>
 <span class="co">#&gt;  $ Exposure Time              : chr &quot;1/30 sec&quot;</span>
 <span class="co">#&gt;  $ F-Number                   : chr &quot;f/2.2&quot;</span>
-<span class="co">#&gt;  $ File Modified Date         : chr &quot;Fri Jun 21 15:46:50 -07:00 2019&quot;</span>
+<span class="co">#&gt;  $ File Modified Date         : chr &quot;Thu Aug 01 22:57:30 -07:00 2019&quot;</span>
 <span class="co">#&gt;  $ File Name                  : chr &quot;calculator.jpg&quot;</span>
 <span class="co">#&gt;  $ File Size                  : chr &quot;83654 bytes&quot;</span>
 <span class="co">#&gt;  $ Flash                      : chr &quot;Flash did not fire&quot;</span>
@@ -387,7 +387,7 @@ metadata &lt;-
 <span class="co">#&gt;  $ X-TIKA:content             : chr &quot;&lt;html xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;\n&lt;head&gt;\n&lt;meta name=\&quot;Exif Version\&quot; content=\&quot;2.21\&quot; /&gt;\n&lt;meta n&quot;| __truncated__</span>
 <span class="co">#&gt;  $ X-TIKA:content_handler     : chr &quot;ToXMLContentHandler&quot;</span>
 <span class="co">#&gt;  $ X-TIKA:digest:MD5          : chr &quot;1d6e398a96f058db680b7249beb8eeda&quot;</span>
-<span class="co">#&gt;  $ X-TIKA:parse_time_millis   : chr &quot;34&quot;</span>
+<span class="co">#&gt;  $ X-TIKA:parse_time_millis   : chr &quot;41&quot;</span>
 <span class="co">#&gt;  $ XMP Value Count            : chr &quot;4&quot;</span>
 <span class="co">#&gt;  $ Y Resolution               : chr &quot;72 dots per inch&quot;</span>
 <span class="co">#&gt;  $ date                       : chr &quot;2014-07-01T02:49:22&quot;</span>
@@ -475,7 +475,7 @@ content_type
 <p>You may find these resources useful:</p>
 <ul>
 <li>Current Tika issues and progress can be seen here: <a href="https://issues.apache.org/jira/projects/TIKA" class="uri">https://issues.apache.org/jira/projects/TIKA</a></li>
-<li>The Tika Wiki is here: <a href="https://wiki.apache.org/tika/FrontPage" class="uri">https://wiki.apache.org/tika/FrontPage</a></li>
+<li>The Tika Wiki is here: <a href="https://cwiki.apache.org/confluence/display/tika/" class="uri">https://cwiki.apache.org/confluence/display/tika/</a></li>
 <li>Tika sourcecode: <a href="https://github.com/apache/tika" class="uri">https://github.com/apache/tika</a></li>
 </ul>
 </div>
