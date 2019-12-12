@@ -1,4 +1,4 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 # only evaluate code if "NOT_CRAN"
 NOT_CRAN <- identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 
@@ -12,7 +12,7 @@ if(NOT_CRAN){
 }
 
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 
 library('rtika')
 library('magrittr')
@@ -46,12 +46,12 @@ text <-
 # text <- tika_text(batch)
 
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 # Find which files had an issue
 # Handle them if needed
 batch[which(is.na(text))]
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 length(text)
 
 search <-
@@ -59,7 +59,7 @@ search <-
 
 length(search)
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 download_directory <- tempfile('rtika_')
 
 dir.create(download_directory)
@@ -75,7 +75,7 @@ downloaded <-
 downloaded
 
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 # create a directory not already in use.
 my_directory <-
    tempfile('rtika_')
@@ -96,10 +96,10 @@ processed_files <- file.path(
                 )
 
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 processed_files
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 library('xml2')
 
 # get XHTML text
@@ -116,7 +116,7 @@ links <-
 
 sample(links[[1]],10)
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 # Content-Type
 html %>%
 lapply(xml2::xml_find_first, '//meta[@name="Content-Type"]') %>%
@@ -130,7 +130,7 @@ lapply(xml2::xml_attr, 'content') %>%
 unlist()
 
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 library('jsonlite')
 # batch <- system.file("extdata", "calculator.jpg", package = "rtika")
 
@@ -144,11 +144,11 @@ metadata <-
 str(metadata[[6]])
 
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 metadata[[6]]$'geo:lat'
 metadata[[6]]$'geo:long'
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 # wget gets a webpage and other files. 
 # sys::exec_wait('wget', c('--page-requisites', 'https://tika.apache.org/'))
 # Put it all into a .zip file 
@@ -164,7 +164,7 @@ metadata <-
 # The structure is very long. See it on your own with: str(metadata)
 
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 # the 'X-TIKA:embedded_resource_path' field
 embedded_resource_path <- 
     metadata %>%
@@ -172,14 +172,14 @@ embedded_resource_path <-
 
 embedded_resource_path
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 content_type <-
     metadata %>%
     lapply(function(x){ x$'Content-Type' }) 
 
 content_type
 
-## ---- eval=NOT_CRAN------------------------------------------------------
+## ---- eval=NOT_CRAN-----------------------------------------------------------
 content <- 
      metadata %>%
     lapply(function(x){ x$'X-TIKA:content' })
